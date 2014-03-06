@@ -36,8 +36,8 @@
       <HintPath>..\bin\Release\Patterns.dll</HintPath>
       <Private>False</Private>
     </Reference>
-	<Reference Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' " Include="Patterns">
-      <HintPath>..\bin\Debug\Patterns.dll</HintPath>
+	<Reference Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' " Include="Patterns debug">
+      <HintPath>..\bin\Debug\Patterns_d.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

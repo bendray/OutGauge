@@ -44,6 +44,7 @@
     <OutDir>..\bin\$(Configuration)\</OutDir>
     <IntDir>..\obj\$(Configuration)\</IntDir>
     <TargetExt>.dll</TargetExt>
+    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -76,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Include\OutGauge.h" />
+    <ClInclude Include="Include\Patterns.h" />
     <ClInclude Include="Include\SharedMemory.h" />
   </ItemGroup>
   <ItemGroup>

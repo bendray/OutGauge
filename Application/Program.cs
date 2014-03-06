@@ -7,7 +7,11 @@ namespace OutGauge.Application
 	{
 		public static void Main (string[] args)
 		{
-			SMMapper mapper = new SMMapper ();
+			using (SMMapper mapper = new SMMapper ()) {
+				mapper.Run ();
+			}
+			Console.Write ("Press any key...");
+			Console.ReadKey ();
 		}
 	}
 }
