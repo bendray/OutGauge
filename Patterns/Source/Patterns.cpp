@@ -1,23 +1,43 @@
 #include "..\Include\Patterns.h"
+#include <string.h>
 #include <stdio.h>
 
 using namespace OutGauge;
+using namespace System::IO;
+using namespace System::Runtime::InteropServices;
 
 #define MAP_OBJECT_NAME L"$pcars$"
 
-void Patterns::SMMapper::Run() {
-	
-	if(m_sharedData) {
-		//	printf( "%d \n", m_sharedData->mVersion);
-		//	printf( "%d \n", m_sharedData->mBuildVersionNumber);
-		//	printf( "%d \n", m_sharedData->mGameState);
-		//	printf( "%s \n", m_sharedData->mCarName);
-	}
+void Patterns::SMMapper::Write() {
 
-	return;
+	if(m_sharedData) {
+		try
+		{
+			const int size = sizeof(SharedMemory);
+
+			array<System::Byte> ^buffer = gcnew array<System::Byte>(size);
+
+			Marshal::Copy((System::IntPtr)m_sharedData, buffer, 0, size);
+
+			BinaryWriter ^bw = gcnew BinaryWriter(m_stream);
+
+			bw->Write(buffer);
+
+			m_stream->Seek (0, SeekOrigin::Begin);
+
+			return;
+
+		}
+		catch (System::Exception^ ex)
+		{
+			throw ex;
+		}
+	}
 }
 
-Patterns::SMMapper::SMMapper() {
+Patterns::SMMapper::SMMapper(System::IO::MemoryStream^ stream) {
+
+	this->m_stream = stream;
 
 	m_fileHandle = OpenFileMapping( PAGE_READONLY, FALSE, MAP_OBJECT_NAME );
 	if (m_fileHandle == INVALID_HANDLE_VALUE)
